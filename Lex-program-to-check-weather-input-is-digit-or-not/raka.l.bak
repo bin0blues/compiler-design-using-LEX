@@ -1,0 +1,20 @@
+%{
+#include <stdio.h>
+%}
+
+%%
+
+^[0-9]+         { printf("digit\n"); }           // Matches only a sequence of digits from start to end
+^[0-9]+[a-zA-Z]+ { printf("not a digit\n"); }     // Matches a sequence that starts with digits and includes letters
+^[a-zA-Z]+[0-9]* { printf("not a digit\n"); }     // Matches a sequence that starts with letters and may include digits
+.                { printf("not a digit\n"); }     // Matches any other single character and prints "not a digit"
+
+%%
+
+int yywrap() { return 1; }
+
+int main()
+{
+    yylex();
+    return 0;
+}
